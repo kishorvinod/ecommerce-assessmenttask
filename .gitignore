@@ -1,3 +1,10 @@
 ## Environment files
 
 .env
+
+#node files
+
+node_modules/
+
+#sqlite files
+*.sqlite

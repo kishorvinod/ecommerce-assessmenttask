@@ -2,12 +2,14 @@ const express = require('express');
 const sequelize = require('./config/database');
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,

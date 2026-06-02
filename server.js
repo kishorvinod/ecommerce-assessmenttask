@@ -1,12 +1,23 @@
 const express = require('express');
 const sequelize = require('./config/database');
 const dotenv = require('dotenv');
+const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100, 
+    message: {
+        error: "Too many requests, please try again later"
+    }
+});
+
+app.use(limiter);
 
 const authRoutes = require('./routes/auth/authRoutes');
 const userRoutes = require('./routes/user/userRoutes');
